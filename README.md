@@ -175,6 +175,8 @@ Potential future work, not current functionality:
 
 Taif Alosaimi — Full-Stack Developer in training.
 
-## Project purpose
+## Project Purpose
 
-Educational and portfolio project.
+DST Photobooth is an Arabic-first photobooth booking website built with Django. It allows customers to explore the business, view available packages, and submit booking requests through an online form.
+
+This is an educational and portfolio project.
