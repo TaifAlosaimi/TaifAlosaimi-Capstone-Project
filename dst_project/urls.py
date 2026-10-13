@@ -28,3 +28,4 @@ urlpatterns = [
     path("", include("bookings.urls", namespace="bookings")),
     path("about/", about, name="about"),
 ]
+handler404 = "bookings.views.custom_404"

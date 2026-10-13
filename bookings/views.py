@@ -13,6 +13,14 @@ def home(request):
 def about(request):
     return render(request, "bookings/about.html")
 
+def custom_404(request, exception):
+    return render(
+        request,
+        "bookings/404.html",
+        status=404,
+    )
+
+
 def booking_create(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
