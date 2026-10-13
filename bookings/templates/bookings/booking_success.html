@@ -1,30 +1,14 @@
+{% extends "bookings/base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+{% block title %}شكرًا لكم | DST Photobooth{% endblock %}
 
-<head>
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'bookings/booking_success.css' %}">
+{% endblock %}
 
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <link
-        rel="stylesheet"
-        href="{% static 'bookings/booking_success.css' %}"
-    >
-
-    <title>شكرًا لكم | DST Photobooth</title>
-
-</head>
-
-
-<body>
-
-    <main class="success-page">
+{% block page_content %}
+<main class="success-page">
 
         <div class="success-frame">
 
@@ -108,7 +92,4 @@
         </div>
 
     </main>
-
-</body>
-
-</html>
+{% endblock %}

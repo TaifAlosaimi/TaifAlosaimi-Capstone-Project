@@ -1,20 +1,13 @@
+{% extends "bookings/base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+{% block title %}DST | فوتوبوث{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+{% block page_styles %}
     <link rel="stylesheet" href="{% static 'bookings/home.css' %}">
+{% endblock %}
 
-    <title>DST | فوتوبوث</title>
-</head>
-
-
-<body>
-
+{% block page_content %}
 <div class="home-page">
 
 
@@ -69,10 +62,10 @@
 
                 <h1 class="hero-title">
 
-                    لحظاتكم..
+                    لحظاتكم،
 
                     <span>
-                        مخلدة طوال السنين
+                        ذكرى تدوم عبر السنين
                     </span>
 
                 </h1>
@@ -169,78 +162,7 @@
      FOOTER
      ===================================================== -->
 
-<footer class="dst-footer">
-
-    <div class="footer-ornament" aria-hidden="true">
-        <span></span>
-        <i></i>
-        <span></span>
-    </div>
-
-    <div class="footer-brand">
-        DST PHOTOBOOTH
-    </div>
-   
-
-    <p class="footer-tagline">
-        لتخليد لحظاتكم طوال السنين
-    </p>
-
-    <nav class="footer-socials" aria-label="Social Media">
-
-        <a href="https://www.instagram.com/dst.photobooth"
-           target="_blank"
-           rel="noopener noreferrer">
-            Instagram
-        </a>
-
-        <span>·</span>
-
-        <a href="https://www.tiktok.com/@dst.photobooth"
-           target="_blank"
-           rel="noopener noreferrer">
-            TikTok
-        </a>
-
-        <span>·</span>
-
-        <a href="https://snapchat.com/t/7Dnwzipi"
-           target="_blank"
-           rel="noopener noreferrer">
-            Snapchat
-        </a>
-
-        <span>·</span>
-
-        <a href="https://wa.me/966501169747"
-           target="_blank"
-           rel="noopener noreferrer">
-            WhatsApp
-        </a>
-
-    </nav>
-
-    <div class="footer-line"></div>
-
-    <div class="footer-bottom">
-
-        <div class="footer-copyright">
-            DST Photobooth © 2026
-            <span>·</span>
-            جميع الحقوق محفوظة
-        </div>
-
-        <div class="footer-credit">
-            Designed &amp; Developed by Eng. Taif Alosaimi
-        </div>
-
-    </div>
-
-</footer>
+{% include "bookings/partials/footer.html" %}
 
 </div>
-
-
-</body>
-
-</html>
+{% endblock %}

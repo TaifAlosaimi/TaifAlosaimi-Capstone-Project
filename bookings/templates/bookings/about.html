@@ -1,20 +1,13 @@
+{% extends "bookings/base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+{% block title %}من نحن | DST{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+{% block page_styles %}
     <link rel="stylesheet" href="{% static 'bookings/about.css' %}">
+{% endblock %}
 
-    <title>من نحن | DST</title>
-</head>
-
-
-<body>
-
+{% block page_content %}
 <div class="about-page">
 
 
@@ -53,6 +46,7 @@
     </a>
 
     
+
 </nav>
 
 
@@ -78,46 +72,62 @@
 
 
 
-    
-<!-- =====================================================
-     HERO
-     ===================================================== -->
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
 
-<section class="about-hero">
-
-    <div class="hero-content">
-
-        <div class="hero-copy">
-
-            <h1>
-من نحن؟            </h1>
-
-            <p class="hero-description">
-                DST هي خدمة تصوير مناسبات تجمع بين تجربة الـPhotobooth
-                والتصوير الاحترافي.
-                نركز على تقديم تجربة مختلفة للضيوف، مع اهتمام بالتفاصيل
-                وجودة الصور، بحيث تكون كل لقطة ذكرى تستحق الاحتفاظ بها.
-            </p>
-
-          
-
-        </div>
+    <main>
 
 
-        <div class="hero-image">
+        <section class="about-hero">
 
-            <img
-                src="{% static 'bookings/images/girl2.jpg' %}"
-                alt="DST"
-            >
+            
 
-        </div>
 
-    </div>
+            <div class="hero-content">
 
-</section>
-    
-         
+                <div class="hero-copy">
+
+                    <h1>
+                        من نحن؟ 
+                    </h1>
+
+                    <p class="hero-description">
+                        DST هي خدمة تصوير مناسبات تجمع بين تجربة البوث المخصص للمناسبة
+                        والتصوير الاحترافي,
+                        نركز على تقديم تجربة مختلفة للضيوف، مع اهتمام بالتفاصيل
+                        وجودة الصور، بحيث تكون كل لقطة ذكرى تستحق الاحتفاظ بها
+                    </p>
+
+<div class="hero-image">
+
+
+                    <svg class="hero-orbit" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+                        <path class="hero-orbit-path" id="dst-hero-orbit-path" d="M 500 42 C 735 42 925 175 925 350 C 925 525 735 658 500 658 C 265 658 75 525 75 350 C 75 175 265 42 500 42 Z" />
+                        <circle class="hero-orbit-dot" r="4">
+                            <animateMotion dur="16s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#dst-hero-orbit-path" />
+                            </animateMotion>
+                        </circle>
+                    </svg>
+
+                    <img
+                        src="{% static 'bookings/images/girl2.jpg' %}"
+                        alt="DST Photobooth — صورة تذكارية من تجربة التصوير"
+                    >
+
+                </div>
+
+                <!-- Decorative editorial slogan -->
+                <p class="hero-slogan" aria-label="Some moments are gold">
+                    <span class="hero-slogan-main">Some moments are</span>
+                    <span class="hero-slogan-gold">gold</span>
+                </p>
+
+            </div>
+
+        </section>
+
 
 
                        
@@ -151,13 +161,13 @@
                     </span>
 
                     <h2>
-                          التجربة
+                        ايش نقدم؟
                     </h2>
 
                     <p>
                         نقدم تجربة Photobooth متكاملة تشمل التصوير الاحترافي،
                         تجهيز ركن التصوير، والطباعة الفورية، مع إمكانية تخصيص
-                        التجربة بما يناسب هوية وتفاصيل مناسبتكم.
+                        التجربة بما يناسب هوية وتفاصيل مناسبتكم مع كرت تذكاري حامل للصورة
                     </p>
 
                 </div>
@@ -186,12 +196,12 @@
                     </span>
 
                     <h2>
-                        أين نتواجد ؟
+                        وين نتواجد؟
                     </h2>
 
                     <p>
                         نقدم خدماتنا في الرياض ، ونسعى لتغطية
-                        مناسباتكم في مواقع مختلفة حسب نطاق الخدمة وتفاصيل المناسبة.
+                        مناسباتكم في مواقع مختلفة حسب نطاق الخدمة وتفاصيل المناسبة
                     </p>
 
                 </div>
@@ -218,50 +228,31 @@
 
         <section class="about-section difference-section">
 
-          
+            <div class="section-content">
 
-            <div class="difference-content">
-
-                <span class="section-label">
-                    WHAT MAKES US DIFFERENT
-                </span>
-
-                <h2>
-                    مصورات محترفات، ليس مجرد Photobooth
-                </h2>
-
-
-                <div class="difference-list">
-
-                    <p>
-                        مع التركيز على
-                    </p>
-
-                    <ul>
-
-                        <li>
-                            الاهتمام بالتفاصيل
-                        </li>
-
-                        <li>
-                            تخصيص التجربة
-                        </li>
-
-                        <li>
-                            جودة التصوير والإخراج
-                        </li>
-
-                    </ul>
-
-                </div>
-               <div class="section-image">
-
+                <div class="section-image">
                     <img
                         src="{% static 'bookings/images/card1.jpg' %}"
-                        alt="DST"
+                        alt="DST Photobooth"
                     >
+                </div>
+
+                <div class="section-text">
+
+                    <span class="section-label">
+                        WHAT MAKES US DIFFERENT
+                    </span>
+
+                    <h2>
+                        مصورات محترفات، مو مجرد Photobooth
+                    </h2>
+
+                    <p>
+                        مع التركيز على الاهتمام بالتفاصيل، وتخصيص التجربة، وجودة التصوير
+                    </p>
 
                 </div>
+
             </div>
 
         </section>
@@ -271,85 +262,11 @@
 
     </main>
 
-</div>
-
-
 <!-- =====================================================
      FOOTER
      ===================================================== -->
 
-<footer class="dst-footer">
-
-    <div class="footer-ornament" aria-hidden="true">
-        <span></span>
-        <i></i>
-        <span></span>
-    </div>
-
-    <div class="footer-brand">
-        DST PHOTOBOOTH
-    </div>
-
-    <p class="footer-tagline">
-        لتخليد لحظاتكم طوال السنين
-    </p>
-
-    <nav class="footer-socials" aria-label="Social Media">
-
-        <a href="https://www.instagram.com/dst.photobooth"
-           target="_blank"
-           rel="noopener noreferrer">
-            Instagram
-        </a>
-
-        <span>·</span>
-
-        <a href="https://www.tiktok.com/@dst.photobooth"
-           target="_blank"
-           rel="noopener noreferrer">
-            TikTok
-        </a>
-
-        <span>·</span>
-
-        <a href="https://snapchat.com/t/7Dnwzipi"
-           target="_blank"
-           rel="noopener noreferrer">
-            Snapchat
-        </a>
-
-        <span>·</span>
-
-        <a href="https://wa.me/966501169747"
-           target="_blank"
-           rel="noopener noreferrer">
-            WhatsApp
-        </a>
-
-    </nav>
-
-    <div class="footer-line"></div>
-
-    <div class="footer-bottom">
-
-        <div class="footer-copyright">
-            DST Photobooth © 2026
-            <span>·</span>
-            جميع الحقوق محفوظة
-        </div>
-
-        <div class="footer-credit">
-            Designed &amp; Developed by Eng. Taif Alosaimi
-        </div>
-
-    </div>
-
-</footer>
+{% include "bookings/partials/footer.html" %}
 
 </div>
-
-
-
-</body>
-
-</html>
+{% endblock %}

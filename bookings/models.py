@@ -9,6 +9,24 @@ class Package(models.Model):
     photo_count = models.PositiveIntegerField()
     extra_photos = models.PositiveIntegerField(default=0)
 
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(price__gte=0),
+                name="package_price_nonnegative",
+            ),
+            models.CheckConstraint(
+                condition=models.Q(duration_hours__gt=0),
+                name="package_duration_positive",
+            ),
+            models.CheckConstraint(
+                condition=models.Q(photo_count__gt=0),
+                name="package_photo_count_positive",
+            ),
+        ]
+
+
     def __str__(self):
         return self.name
 
@@ -29,7 +47,7 @@ class Booking(models.Model):
 
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)
-    email = models.EmailField()
+    email = models.EmailField(blank=True)
     event_type = models.CharField(
         max_length=30,
         choices=EventType.choices

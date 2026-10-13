@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="{% if request.COOKIES.dst_theme == 'dark' %}dark{% else %}light{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DST Photobooth{% endblock %}</title>
+    {% block page_styles %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'bookings/themes.css' %}">
+</head>
+<body data-theme="{% if request.COOKIES.dst_theme == 'dark' %}dark{% else %}light{% endif %}">
+    {% block page_content %}{% endblock %}
+
+    <nav class="theme-switcher" aria-label="مظهر الموقع">
+        <span class="theme-switcher-label">المظهر</span>
+        <a href="{% url 'bookings:set_theme' 'light' %}?next={{ request.path|urlencode }}"
+           {% if request.COOKIES.dst_theme != 'dark' %}aria-current="true"{% endif %}>
+            فاتح
+        </a>
+        <a href="{% url 'bookings:set_theme' 'dark' %}?next={{ request.path|urlencode }}"
+           {% if request.COOKIES.dst_theme == 'dark' %}aria-current="true"{% endif %}>
+            داكن
+        </a>
+    </nav>
+</body>
+</html>

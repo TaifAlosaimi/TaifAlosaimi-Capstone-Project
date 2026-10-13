@@ -63,6 +63,15 @@ Administrators can manage:
 
 ---
 
+
+### Shared Templates and Themes
+
+- Pages extend `bookings/base.html` to reuse the document structure and page-style block.
+- The shared footer is stored in `bookings/templates/bookings/partials/footer.html`.
+- Visitors can select a light or dark theme. The selection is stored in the `dst_theme` cookie for 30 days.
+- The theme defaults to light when the cookie is missing or contains an unsupported value.
+- Shared theme styling is defined in `bookings/static/bookings/themes.css`.
+
 ## Booking Flow
 
 The booking process follows a simple Django request-response flow:

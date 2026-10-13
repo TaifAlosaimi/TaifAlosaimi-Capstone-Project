@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500;600&display=swap');
 
 
 /* =========================================================
@@ -369,44 +369,21 @@ img {
 
 
 .hero-description {
-    max-width: 650px;
+    max-width: 100%;
 
     margin-top: 38px;
 
     color: var(--walnut);
 
-    font-size: 16px;
+    font-size: 18px;
 
-    line-height: 2.15;
+    line-height: 2;
 
     animation:
         dstFadeUp .85s .9s var(--ease) both;
 }
 
 
-.hero-index {
-    display: inline-block;
-
-    margin-top: 23px;
-
-    color: var(--taupe);
-
-    font-family: var(--english);
-
-    font-size: 13px;
-    font-weight: 500;
-
-    letter-spacing: .24em;
-
-    line-height: 1.2;
-
-    direction: ltr;
-
-    text-transform: uppercase;
-
-    animation:
-        dstHeroMark .75s 1.05s var(--ease) both;
-}
 
 
 /* =========================================================
@@ -414,68 +391,25 @@ img {
    ========================================================= */
 
 .hero-image {
-    width: 100%;
+    width: min(76%, 650px);
+
+
+    /* Align the image with the left edge of the screen */
+    margin-left: calc((100vw - var(--page)) / -2 - 56px);
+    margin-right: auto;
 
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    background: transparent;
 
-    background: var(--walnut);
-
-    animation: none;
+    animation: dstHeroFloat 6.5s ease-in-out 3.3s infinite;
 }
 
-
-/* Soft editorial veil + frame */
-.hero-image::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 2;
-    pointer-events: none;
-
-    border: 1px solid rgba(244, 239, 234, .48);
-
-    box-shadow:
-        inset 0 0 0 18px rgba(244, 239, 234, .035);
-
-    background:
-        linear-gradient(
-            110deg,
-            rgba(244, 239, 234, .18) 0%,
-            rgba(244, 239, 234, .06) 28%,
-            rgba(244, 239, 234, 0) 55%
-        );
-
-    opacity: 0;
-
-    animation:
-        dstHeroFocusVeil 3.1s .15s var(--ease-soft) both;
-}
-
-
-/* Fine editorial line appears only after the image settles */
+/* Remove the old overlay, frame, and decorative line. */
+.hero-image::before,
 .hero-image::after {
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    bottom: 24px;
-
-    width: 55%;
-    height: 1px;
-
-    background: var(--cream);
-
-    z-index: 3;
-
-    transform: scaleX(0);
-    transform-origin: right center;
-
-    animation:
-        dstHeroLine 1.05s 2.35s var(--ease) both;
+    content: none;
+    display: none;
 }
 
 
@@ -489,31 +423,84 @@ img {
 
     object-fit: contain;
 
-    /* The image starts intentionally out of focus. */
-    opacity: .18;
-    transform: scale(1.065);
-    filter:
-        blur(20px)
-        saturate(.68)
-        contrast(.94);
-
-    will-change: transform, opacity, filter;
-
-    animation:
-        dstHeroFocus 3.2s .2s var(--ease-soft) both;
-
-    transition:
-        transform 1.4s var(--ease-soft),
-        filter 1.4s var(--ease-soft);
+  
 }
 
 
-.hero-image:hover img {
-    transform: scale(1.018);
-    filter:
-        blur(0)
-        saturate(1)
-        contrast(1);
+
+
+/* Editorial details: restrained typography and a fine orbit behind the photo. */
+.hero-image {
+    isolation: isolate;
+}
+
+.hero-image img {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-image-caption {
+    position: absolute;
+    z-index: 2;
+    top: -38px;
+    left: 3%;
+    color: var(--walnut);
+    font-family: var(--english);
+    font-size: clamp(12px, 1.05vw, 15px);
+    font-weight: 400;
+    letter-spacing: .16em;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-transform: none;
+    opacity: 0;
+    animation: dstCaptionReveal .9s 1.5s var(--ease) forwards;
+}
+
+.hero-orbit {
+    position: absolute;
+    z-index: 0;
+    inset: -7% -5% -7%;
+    width: 110%;
+    height: 114%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.hero-orbit-path {
+    fill: none;
+    stroke: var(--taupe);
+    stroke-width: 1.15;
+    vector-effect: non-scaling-stroke;
+    opacity: .78;
+}
+
+.hero-orbit-dot {
+    fill: var(--walnut);
+    stroke: var(--cream);
+    stroke-width: 2;
+}
+
+
+@keyframes dstCaptionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: .92;
+        transform: translateY(0);
+    }
+}
+
+/* Gentle floating tilt for the smaller hero photo. */
+@keyframes dstHeroFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-1deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(1.2deg);
+    }
 }
 
 
@@ -572,8 +559,7 @@ img {
         box-shadow .6s var(--ease);
 }
 
-.section-content:hover,
-.difference-content:hover {
+.section-content:hover {
     transform: translateY(-6px);
 
     box-shadow:
@@ -588,7 +574,7 @@ img {
 .section-image,
 .experience-section .section-image,
 .location-section .section-image,
-.difference-content .section-image {
+.difference-section .section-image {
     order: 1;
     width: 100%;
     min-height: 0;
@@ -638,7 +624,7 @@ img {
     object-position: center 65%;
 }
 
-.difference-content .section-image img {
+.difference-section .section-image img {
     object-position: center 65%;
 }
 
@@ -647,7 +633,7 @@ img {
 
 .experience-section .section-content::before,
 .location-section .section-content::before,
-.difference-content::before {
+.difference-section .section-content::before {
     content: none !important;
     display: none !important;
 }
@@ -692,19 +678,16 @@ img {
         transform .8s var(--ease);
 }
 
-.section-content:hover .section-image img,
-.difference-content:hover .section-image img {
+.section-content:hover .section-image img {
     transform: scale(1.02);
     filter: saturate(.92);
 }
 
-.section-content:hover .section-image::before,
-.difference-content:hover .section-image::before {
+.section-content:hover .section-image::before {
     opacity: .25;
 }
 
-.section-content:hover .section-image::after,
-.difference-content:hover .section-image::after {
+.section-content:hover .section-image::after {
     opacity: 1;
     transform: scale(1);
 }
@@ -832,143 +815,12 @@ img {
 
 
 /* =========================================================
-   THIRD CARD — DIFFERENCE
+   THIRD CARD — USE THE SHARED CARD DESIGN
    ========================================================= */
 
 .difference-section {
     padding-top: 0;
     padding-bottom: 110px;
-}
-
-.difference-content {
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-    max-width: none;
-    margin: 0;
-
-    position: relative;
-    overflow: hidden;
-
-    direction: ltr;
-
-    border: 1px solid var(--line);
-    background: var(--cream);
-
-    transition:
-        transform .6s var(--ease),
-        box-shadow .6s var(--ease);
-}
-
-.difference-content .section-label {
-    order: 2;
-    margin: 30px 30px 16px auto;
-}
-
-.difference-content h2 {
-    order: 3;
-
-    max-width: calc(100% - 60px);
-
-    margin: 0 30px 20px auto;
-
-    color: var(--walnut);
-
-    font-family: var(--display);
-    font-size: clamp(30px, 3vw, 42px);
-    font-weight: 500;
-
-    line-height: 1.3;
-    letter-spacing: -1px;
-
-    animation: titleReveal 1s .1s var(--ease) both;
-}
-
-.difference-content .difference-list {
-    order: 4;
-
-    width: auto;
-
-    margin: 0 30px 34px auto;
-    padding: 0;
-
-    direction: rtl;
-}
-
-.difference-list p {
-    margin: 0 0 14px;
-
-    color: var(--taupe);
-    font-size: 11px;
-    font-weight: 500;
-
-    line-height: 1.8;
-    text-align: right;
-}
-
-.difference-list ul {
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-    counter-reset: difference-item;
-}
-
-.difference-list li {
-    counter-increment: difference-item;
-
-    display: flex;
-    align-items: center;
-
-    min-height: 45px;
-
-    margin: 0;
-    padding: 0;
-
-    color: var(--walnut);
-    font-size: 12px;
-    font-weight: 500;
-
-    line-height: 1.7;
-
-    border-top: 1px solid rgba(166, 163, 157, .42);
-
-    transition:
-        padding-right .4s var(--ease),
-        color .35s var(--ease);
-}
-
-.difference-list li:last-child {
-    border-bottom: 1px solid rgba(166, 163, 157, .42);
-}
-
-.difference-list li::before {
-    content: "0" counter(difference-item);
-
-    flex: 0 0 38px;
-    margin-left: 14px;
-
-    color: var(--taupe);
-    font-family: var(--english);
-    font-size: 16px;
-    font-weight: 400;
-
-    direction: ltr;
-    text-align: right;
-
-    transition:
-        color .35s var(--ease),
-        transform .4s var(--ease);
-}
-
-.difference-list li:hover {
-    padding-right: 6px;
-}
-
-.difference-list li:hover::before {
-    color: var(--walnut);
-    transform: translateX(-3px);
 }
 
 
@@ -984,6 +836,12 @@ img {
 
     .hero-content {
         gap: 5vw;
+    }
+
+    .hero-image {
+    width: min(82%, 680px);
+    margin-left: calc((100vw - var(--page)) / -2);
+    margin-right: auto;
     }
 
     .hero-copy h1 {
@@ -1014,26 +872,7 @@ img {
         font-size: 13px;
     }
 
-    .section-image,
-    .difference-content .section-image {
-        aspect-ratio: 1.3 / 1;
     }
-
-    .difference-content .section-label {
-        margin: 28px 28px 15px auto;
-    }
-
-    .difference-content h2 {
-        margin-right: 28px;
-        max-width: calc(100% - 56px);
-        font-size: clamp(32px, 5vw, 46px);
-    }
-
-    .difference-content .difference-list {
-        margin-right: 28px;
-        margin-bottom: 30px;
-    }
-}
 
 
 /* =========================================================
@@ -1115,14 +954,13 @@ img {
         line-height: 2;
     }
 
-    .hero-index {
-        font-size: 11px;
-        letter-spacing: .18em;
-    }
-
     .hero-image {
-        width: 100%;
-        height: auto;
+    width: 88%;
+    max-width: 560px;
+    height: auto;
+
+    margin-left: -18px;
+    margin-right: auto;
     }
 
     .hero-image img {
@@ -1202,53 +1040,6 @@ img {
     .section-image::after {
         inset: 7px;
     }
-
-    /* DIFFERENCE — keep its desktop-style full-width layout */
-
-    .difference-section {
-        padding-top: 0;
-        padding-bottom: 70px;
-    }
-
-    .difference-content {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .difference-content .section-label {
-        margin: 26px 20px 13px auto;
-    }
-
-    .difference-content h2 {
-        margin: 0 20px 17px auto;
-        max-width: calc(100% - 40px);
-        font-size: 30px;
-        line-height: 1.35;
-        letter-spacing: -.7px;
-    }
-
-    .difference-content .difference-list {
-        width: auto;
-        margin: 0 20px 25px auto;
-    }
-
-    .difference-list p {
-        margin-bottom: 11px;
-        font-size: 10px;
-    }
-
-    .difference-list li {
-        min-height: 46px;
-        font-size: 11px;
-    }
-
-    .difference-list li::before {
-        flex-basis: 34px;
-        margin-left: 9px;
-        font-size: 15px;
-    }
-
 }
 
 /* =========================================================
@@ -1256,6 +1047,23 @@ img {
    ========================================================= */
 
 @media (max-width: 430px) {
+
+    .hero-image {
+        width: 92%;
+    }
+
+    .hero-image-caption {
+        top: -27px;
+        left: 1%;
+        font-size: 10px;
+        letter-spacing: .12em;
+    }
+
+    .hero-orbit {
+        inset: -6% -4% -6%;
+        width: 108%;
+        height: 112%;
+    }
 
     .main-nav {
         gap: 8px;
@@ -1613,6 +1421,20 @@ img {
 
 @media (prefers-reduced-motion: reduce) {
 
+    .hero-image {
+        animation: none !important;
+    }
+
+    .hero-image-caption {
+        animation: none !important;
+        opacity: .92;
+        transform: none;
+    }
+
+    .hero-orbit-dot {
+        display: none;
+    }
+
     *,
     *::before,
     *::after {
@@ -1952,4 +1774,240 @@ img {
         gap: 3px;
     }
 
+}
+
+
+/* =========================================================
+   REQUESTED CHANGE — ABOUT HERO IMAGE BEFORE THE COPY
+   ========================================================= */
+
+/* Keep the existing elements and styling, changing only their visual order. */
+.about-hero .hero-copy {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-hero .hero-image {
+    order: -1;
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   MOBILE NAVBAR — LINKS BESIDE THE LOGO
+   Responsive only; desktop navbar remains unchanged.
+   ========================================================= */
+@media (max-width: 760px) {
+    .nav-container {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        column-gap: clamp(8px, 2.5vw, 16px);
+        direction: ltr;
+    }
+
+    .site-logo {
+        position: static;
+        transform: none;
+        justify-self: start;
+        z-index: 2;
+        width: 48px;
+        height: 48px;
+    }
+
+    .site-logo img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .main-nav {
+        position: static;
+        transform: none;
+        justify-content: flex-start;
+        justify-self: start;
+        width: auto;
+        max-width: none;
+        min-width: 0;
+        gap: clamp(8px, 2.5vw, 16px);
+        margin: 0;
+    }
+
+    .nav-booking {
+        position: static;
+        transform: none;
+        justify-self: end;
+        min-width: 0;
+        min-height: 32px;
+        padding: 0 8px;
+        gap: 5px;
+        font-size: 8px;
+        white-space: nowrap;
+    }
+
+    .main-nav .nav-link {
+        font-size: clamp(9px, 2.5vw, 11px);
+    }
+}
+
+@media (max-width: 380px) {
+    .nav-container {
+        column-gap: 6px;
+    }
+
+    .site-logo,
+    .site-logo img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .main-nav {
+        gap: 7px;
+    }
+
+    .main-nav .nav-link {
+        font-size: 8px;
+    }
+
+    .nav-booking {
+        padding: 0 5px;
+        font-size: 7px;
+    }
+}
+
+
+/* Requested hero image refinements: remove orbit and align the arm with the viewport edge. */
+.hero-orbit {
+    display: none !important;
+}
+
+/*
+   The previous margin-left: 0 rule overrode the left-edge alignment.
+   Pull the image out of the centered page container so the arm starts
+   at the viewport's left edge, without cropping or changing the image.
+*/
+.hero-image {
+    margin-left: calc((100vw - var(--page)) / -2);
+    margin-right: auto;
+}
+
+/* The mobile hero has 18px side gutters, so offset that gutter exactly. */
+@media (max-width: 750px) {
+    .hero-image {
+        margin-left: -18px;
+        margin-right: auto;
+    }
+}
+
+
+/* =========================================================
+   ABOUT HERO — EDITORIAL TYPING SLOGAN
+   Isolated styles; the existing hero image rules are untouched.
+   ========================================================= */
+
+.hero-slogan {
+    position: absolute;
+    z-index: 3;
+    top: clamp(95px, 12vw, 175px);
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    max-width: 52%;
+    margin: 0;
+    direction: ltr;
+    text-align: left;
+    pointer-events: none;
+}
+
+.hero-slogan-main,
+.hero-slogan-gold {
+    display: block;
+    width: max-content;
+    max-width: none;
+    overflow: visible;
+    white-space: nowrap;
+    clip-path: inset(0 100% 0 0);
+    animation: dstSloganType 1.65s steps(17, end) .65s forwards;
+}
+
+.hero-slogan-main {
+    padding: 0.08em 0.12em 0.12em;
+    margin: -0.08em -0.12em -0.04em;
+    color: var(--walnut);
+    font-family: var(--english);
+    font-size: clamp(30px, 4vw, 58px);
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.hero-slogan-gold {
+    /* Extra breathing room protects the script font's terminal strokes. */
+    padding: 0.10em 0.42em 0.30em 0.20em;
+    margin: -0.04em -0.42em -0.1em -0.20em;
+    color: #B88645;
+    font-family: "Allura", cursive;
+    font-size: clamp(58px, 6.3vw, 88px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.12;
+    animation-delay: 2.2s;
+}
+
+@keyframes dstSloganType {
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@media (max-width: 750px) {
+    /* Mobile reading order: image → slogan → About heading → description. */
+    .hero-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .hero-image {
+        order: 1;
+        margin-bottom: 0;
+    }
+
+    .hero-slogan {
+        order: 2;
+        position: relative;
+        top: auto;
+        right: auto;
+        max-width: 100%;
+        margin: 16px 0 0 auto;
+        align-items: flex-start;
+    }
+
+    .hero-copy h1 {
+        order: 3;
+        margin-top: 24px;
+    }
+
+    .hero-description {
+        order: 4;
+        margin-top: 16px;
+    }
+
+    .hero-slogan-main {
+        font-size: clamp(25px, 7.5vw, 38px);
+    }
+
+    .hero-slogan-gold {
+        font-size: clamp(54px, 13vw, 68px);
+        max-width: calc(100vw - 40px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-slogan-main,
+    .hero-slogan-gold {
+        clip-path: none;
+        animation: none;
+    }
 }

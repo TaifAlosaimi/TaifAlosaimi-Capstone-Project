@@ -472,11 +472,14 @@ input, select, textarea {
     text-align: right;
 }
 
+
 .error-message {
     margin-top: 8px;
-    font-size: 10px;
-    color: var(--walnut);
+    font-size: 12px;
+    color: #B42318;
+    font-weight: 600;
 }
+
 
 /* SUBMIT */
 
@@ -1338,6 +1341,7 @@ input, select, textarea {
     transform: translateY(-3px);
 }
 
+
 /* =========================================================
    DST FOOTER
    Premium Editorial / Minimal
@@ -1356,7 +1360,36 @@ input, select, textarea {
 
     color: var(--walnut);
 }
+/* FOOTER ORNAMENT */
 
+.footer-ornament {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    margin-bottom: 52px;
+}
+
+.footer-ornament span {
+    width: 84px;
+    height: 1px;
+
+    background: var(--line);
+}
+
+.footer-ornament i {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: var(--walnut);
+
+    display: block;
+}
 
 /* BRAND */
 
@@ -1515,118 +1548,79 @@ input, select, textarea {
 }
 
 
-
-/* =========================================================
-   FOOTER ORNAMENT
-   Matches the About/Home footer separator
-   ========================================================= */
-
-.dst-footer::before {
-    content: "";
-    display: block;
-
-    width: 180px;
-    height: 5px;
-
-    margin: 0 auto 52px;
-
-    background:
-        linear-gradient(var(--line), var(--line))
-            left center / 74px 1px no-repeat,
-        radial-gradient(
-            circle,
-            var(--walnut) 0 2px,
-            transparent 2.5px
-        )
-            center center / 5px 5px no-repeat,
-        linear-gradient(var(--line), var(--line))
-            right center / 74px 1px no-repeat;
-
-    transform-origin: center;
-    animation: dstFooterOrnament 1s .2s var(--ease) both;
-}
-
-@keyframes dstFooterOrnament {
-    from {
-        opacity: 0;
-        transform: scaleX(.55);
-    }
-
-    to {
-        opacity: 1;
-        transform: scaleX(1);
-    }
-}
-
 /* =========================================================
    FOOTER — MOBILE
    ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
 
     .dst-footer {
-        padding: 48px 0 22px;
+        padding: 52px 0 22px;
     }
 
-    .dst-footer::before {
-        width: 104px;
-        height: 5px;
-        margin-bottom: 28px;
-
-        background:
-            linear-gradient(var(--line), var(--line))
-                left center / 42px 1px no-repeat,
-            radial-gradient(
-                circle,
-                var(--walnut) 0 2px,
-                transparent 2.5px
-            )
-                center center / 5px 5px no-repeat,
-            linear-gradient(var(--line), var(--line))
-                right center / 42px 1px no-repeat;
+    .footer-ornament {
+        gap: 10px;
+        margin-bottom: 30px;
     }
+
+    .footer-ornament span {
+        width: 48px;
+    }
+
+    .footer-ornament i {
+        width: 4px;
+        height: 4px;
+    }
+
 
     .footer-brand {
         font-size: 21px;
+
         letter-spacing: .09em;
     }
 
+
     .footer-tagline {
-        margin-top: 15px;
+        margin-top: 16px;
         font-size: 15px;
         line-height: 1.7;
     }
 
+
     .footer-socials {
-        margin-top: 22px;
+        margin-top: 24px;
         gap: 6px;
     }
+
 
     .footer-socials a,
     .footer-socials span {
         font-size: 10px;
     }
 
+
     .footer-line {
-        margin-top: 34px;
+        margin-top: 38px;
     }
 
+
     .footer-bottom {
-        margin-top: 14px;
+        margin-top: 16px;
         flex-direction: column;
-        gap: 4px;
+        gap: 5px;
         text-align: center;
     }
+
 
     .footer-copyright,
     .footer-credit {
         white-space: normal;
+
         font-size: 8px;
-        line-height: 1.55;
+        line-height: 1.6;
     }
 
 }
-
 
 /* =========================================================
    FOOTER — VERY SMALL SCREENS
@@ -1635,24 +1629,15 @@ input, select, textarea {
 @media (max-width: 430px) {
 
     .dst-footer {
-        padding: 42px 0 18px;
+        padding: 46px 0 20px;
     }
 
-    .dst-footer::before {
-        width: 92px;
-        margin-bottom: 24px;
+    .footer-ornament {
+        margin-bottom: 26px;
+    }
 
-        background:
-            linear-gradient(var(--line), var(--line))
-                left center / 36px 1px no-repeat,
-            radial-gradient(
-                circle,
-                var(--walnut) 0 2px,
-                transparent 2.5px
-            )
-                center center / 5px 5px no-repeat,
-            linear-gradient(var(--line), var(--line))
-                right center / 36px 1px no-repeat;
+    .footer-ornament span {
+        width: 40px;
     }
 
     .footer-brand {
@@ -1660,12 +1645,12 @@ input, select, textarea {
     }
 
     .footer-tagline {
-        margin-top: 13px;
+        margin-top: 14px;
         font-size: 14px;
     }
 
     .footer-socials {
-        margin-top: 18px;
+        margin-top: 20px;
         gap: 5px;
     }
 
@@ -1675,48 +1660,150 @@ input, select, textarea {
     }
 
     .footer-line {
-        margin-top: 28px;
+        margin-top: 30px;
     }
 
     .footer-bottom {
-        margin-top: 12px;
+        margin-top: 13px;
         gap: 3px;
     }
 
 }
 
 
+
 /* =========================================================
-   BOOKING — MOBILE SECTION HEADINGS
-   Keep Arabic headings on one clean line
+   REQUESTED CHANGES — BOOKING HERO AND FORM SECTIONS
    ========================================================= */
 
-@media (max-width: 700px) {
+/* Keep the Arabic heading and "مع DST" on one line when space allows. */
+.hero h1 {
+    max-width: none;
+    font-size: clamp(38px, 5.2vw, 72px);
+    line-height: 1.35;
+}
 
-    .section-heading {
-        grid-template-columns: 42px minmax(0, 1fr);
-        gap: 12px;
+.hero h1 span {
+    display: inline;
+    margin-inline-start: .16em;
+    white-space: nowrap;
+}
+
+.hero h1 span strong {
+    display: inline;
+}
+
+@media (max-width: 640px) {
+    .hero h1 {
+        font-size: clamp(30px, 7vw, 44px);
     }
 
-    .section-heading h2 {
-        font-size: 25px;
-        line-height: 1.35;
-        white-space: nowrap;
-        word-break: normal;
-        overflow-wrap: normal;
+    .hero h1 span {
+        white-space: normal;
+    }
+}
+
+/* Give each existing form section its own restrained card. */
+.booking-form > .form-section {
+    margin: 0 0 26px;
+    padding: clamp(24px, 3.2vw, 42px);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .52);
+    box-shadow: 0 10px 28px rgba(107, 74, 51, .045);
+}
+
+.booking-form > .form-section .section-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-bottom: 28px;
+}
+
+.booking-form > .form-section .section-heading h2 {
+    white-space: normal;
+}
+
+.booking-form > .form-section .input-grid {
+    column-gap: 32px;
+    row-gap: 26px;
+}
+
+.booking-form > .form-section .field input,
+.booking-form > .form-section .field select,
+.booking-form > .form-section .field textarea {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(244, 239, 234, .48);
+}
+
+.booking-form > .form-section .field input:focus,
+.booking-form > .form-section .field select:focus,
+.booking-form > .form-section .field textarea:focus {
+    border-color: var(--walnut);
+    box-shadow: 0 0 0 2px rgba(107, 74, 51, .08);
+}
+
+@media (max-width: 640px) {
+    .booking-form > .form-section {
+        padding: 22px 18px;
+        border-radius: 14px;
     }
 
+    .booking-form > .form-section .input-grid {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 20px;
+    }
+
+    .booking-form > .form-section .field.full {
+        grid-column: auto;
+    }
+}
+
+
+/* =========================================================
+   REQUESTED REFINEMENTS — BEIGE SECTIONS, FOOTER LINKS, MOBILE LOGO
+   ========================================================= */
+
+/* Use a soft warm beige tint for the existing booking section cards. */
+.booking-form > .form-section {
+    background: rgba(107, 74, 51, .035);
+}
+
+/* Keep social links in the booking footer consistent with the other pages. */
+.footer-socials a {
+    text-decoration: none;
+}
+
+/* Keep the logo visible in the booking page's mobile navigation. */
+@media (max-width: 760px) {
+    .nav-container {
+        grid-template-columns: auto 1fr;
+        justify-content: stretch;
+        gap: 16px;
+    }
+
+    .site-logo {
+        display: flex;
+    }
+
+    .main-nav {
+        justify-content: flex-end;
+        gap: 18px;
+    }
 }
 
 @media (max-width: 420px) {
-
-    .section-heading {
-        grid-template-columns: 38px minmax(0, 1fr);
-        gap: 10px;
+    .main-nav {
+        gap: 12px;
     }
 
-    .section-heading h2 {
-        font-size: 23px;
+    .nav-link {
+        font-size: 10px;
     }
 
+    .site-logo,
+    .site-logo img {
+        width: 54px;
+        height: 54px;
+    }
 }

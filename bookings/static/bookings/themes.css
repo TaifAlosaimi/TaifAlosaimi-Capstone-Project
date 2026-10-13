@@ -1,0 +1,139 @@
+/* Shared DST theme controls and color-theme overrides. */
+
+html[data-theme="dark"],
+body[data-theme="dark"] {
+    color-scheme: dark;
+    --cream: #3E2D25;
+    --walnut: #F4EFEA;
+    --taupe: #B9A99C;
+    --line: rgba(244, 239, 234, .22);
+    --line-soft: rgba(244, 239, 234, .14);
+    --walnut-soft: rgba(244, 239, 234, .08);
+}
+
+html[data-theme="light"],
+body[data-theme="light"] {
+    color-scheme: light;
+}
+
+html,
+body {
+    transition: background-color .25s ease, color .25s ease;
+}
+
+.theme-switcher {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    max-width: calc(100vw - 20px);
+    gap: 4px;
+    touch-action: manipulation;
+    padding: 5px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--cream);
+    color: var(--walnut);
+    box-shadow: 0 5px 18px rgba(107, 74, 51, .12);
+    font-family: var(--body, sans-serif);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.theme-switcher-label {
+    padding: 0 7px;
+    color: var(--taupe);
+}
+
+.theme-switcher a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    padding: 6px 9px;
+    border-radius: 999px;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.theme-switcher a:hover,
+.theme-switcher a[aria-current="true"] {
+    background: var(--walnut);
+    color: var(--cream);
+}
+
+/* Keep the form readable when the dark theme is selected. */
+html[data-theme="dark"] .package-card,
+html[data-theme="dark"] .field input,
+html[data-theme="dark"] .field select,
+html[data-theme="dark"] .field textarea,
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    background-color: rgba(244, 239, 234, .08);
+    color: var(--walnut);
+    border-color: var(--line);
+}
+
+html[data-theme="dark"] .package-card:hover,
+html[data-theme="dark"] .package-option input[type="radio"]:checked + .package-card {
+    background-color: rgba(244, 239, 234, .14);
+}
+
+html[data-theme="dark"] .hero-image-frame,
+html[data-theme="dark"] .section-image,
+html[data-theme="dark"] .success-frame {
+    border-color: var(--line);
+}
+
+@media (max-width: 480px) {
+    /* Keep the theme control visible and readable on narrow screens. */
+    .theme-switcher {
+        position: fixed;
+        left: 10px;
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+        z-index: 9999;
+        display: flex;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        font-size: 10px;
+        background-color: var(--cream);
+        color: var(--walnut);
+        border-color: var(--line);
+    }
+
+    .theme-switcher-label {
+        padding: 0 4px;
+    }
+
+    .theme-switcher a[aria-current="true"] {
+        background-color: var(--walnut);
+        color: var(--cream);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html,
+    body,
+    .theme-switcher a {
+        transition: none;
+    }
+}
+
+
+/* Native dropdown options need their own colors in dark mode.
+   The browser menu does not reliably inherit the selected theme colors. */
+html[data-theme="dark"] select option {
+    background-color: #F4EFEA;
+    color: #171411;
+}
+
+html[data-theme="dark"] select optgroup {
+    background-color: #F4EFEA;
+    color: #171411;
+}
