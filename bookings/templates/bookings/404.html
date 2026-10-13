@@ -1,3 +1,4 @@
+
 {% extends "bookings/base.html" %}
 {% load static %}
 
@@ -8,34 +9,41 @@
 {% endblock %}
 
 {% block page_content %}
-<main class="dst-error-page">
+<main class="dst-error-page" dir="rtl">
     <div class="error-frame">
-        <a class="error-logo" href="{% url 'home' %}" aria-label="DST - الرئيسية">
+
+        <a class="error-logo" href="{% url 'home' %}"
+           aria-label="DST - الرئيسية">
             <img src="{% static 'bookings/images/logo.webp' %}" alt="DST">
         </a>
 
-        <p class="error-eyebrow">DST PHOTOBOOTH · ERROR 404</p>
+        <p class="error-eyebrow" dir="ltr">DST PHOTOBOOTH</p>
 
         <div class="error-number" aria-hidden="true">404</div>
 
-        <h1>هذي الصفحة ما لقيناها</h1>
+        <h1>عذرًا، الصفحة غير موجودة</h1>
 
         <p class="error-description">
-            يبدو أن الرابط غير صحيح أو أن الصفحة انتقلت لمكان آخر.
-            خلّينا نرجعك للحظات الجميلة.
+            قد يكون الرابط غير صحيح أو أن الصفحة لم تعد متاحة.
+            يمكنك العودة إلى الصفحة الرئيسية أو الانتقال إلى صفحة الحجز.
         </p>
 
         <div class="error-actions">
-            <a class="error-button error-button-primary" href="{% url 'home' %}">
-                <span>العودة للرئيسية</span>
-                <span aria-hidden="true">↗</span>
+            <a class="error-button error-button-primary"
+               href="{% url 'home' %}">
+                العودة للرئيسية
             </a>
-            <a class="error-button error-button-secondary" href="{% url 'bookings:booking' %}">
-                احجز الآن
+
+            <a class="error-button error-button-secondary"
+               href="{% url 'bookings:booking' %}">
+                صفحة الحجز
             </a>
         </div>
 
-        <p class="error-footer">YOUR MOMENT. YOUR STORY. YOUR WAY.</p>
+        <p class="error-footer" dir="ltr">
+            DST PHOTOBOOTH · CAPTURE THE MOMENT
+        </p>
+
     </div>
 </main>
 {% endblock %}

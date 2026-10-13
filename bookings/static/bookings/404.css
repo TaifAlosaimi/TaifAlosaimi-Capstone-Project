@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500;600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap');
 
 .dst-error-page {
     --error-bg: #F4EFEA;
     --error-text: #6B4A33;
     --error-muted: #A6A39D;
-    --error-line: rgba(107, 74, 51, .22);
+    --error-line: rgba(107, 74, 51, 0.22);
 
     min-height: 100vh;
-    padding: clamp(24px, 5vw, 64px) 20px;
+    padding: clamp(20px, 5vw, 56px) 16px;
     display: grid;
     place-items: center;
     background: var(--error-bg);
@@ -19,10 +20,10 @@
 
 html[data-theme="dark"] .dst-error-page,
 body[data-theme="dark"] .dst-error-page {
-    --error-bg: #3E2D25;
+    --error-bg: #6B4A33;
     --error-text: #F4EFEA;
-    --error-muted: #B9A99C;
-    --error-line: rgba(244, 239, 234, .22);
+    --error-muted: #A6A39D;
+    --error-line: rgba(244, 239, 234, 0.25);
 }
 
 .dst-error-page *,
@@ -32,25 +33,24 @@ body[data-theme="dark"] .dst-error-page {
 }
 
 .dst-error-page .error-frame {
-    width: min(100%, 850px);
-    min-height: min(690px, calc(100vh - 48px));
-    padding: clamp(30px, 7vw, 76px) clamp(20px, 6vw, 70px);
+    width: min(100%, 760px);
+    min-height: min(620px, calc(100vh - 40px));
+    padding: clamp(28px, 6vw, 64px) clamp(18px, 5vw, 56px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--error-line);
-    position: relative;
 }
 
 .dst-error-page .error-logo {
-    width: 72px;
-    height: 72px;
-    margin-bottom: 34px;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 24px;
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: rgba(166, 163, 157, .16);
+    background: rgba(166, 163, 157, 0.14);
 }
 
 .dst-error-page .error-logo img {
@@ -63,62 +63,68 @@ body[data-theme="dark"] .dst-error-page {
     margin: 0;
     color: var(--error-muted);
     font-family: "Bodoni Moda", serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: .22em;
-    direction: ltr;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
 }
 
 .dst-error-page .error-number {
-    margin: 8px 0 -4px;
+    margin: 12px 0 0;
     color: var(--error-text);
     font-family: "Bodoni Moda", serif;
-    font-size: clamp(100px, 21vw, 210px);
+    font-size: clamp(100px, 20vw, 190px);
     font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -.07em;
+    line-height: 1.05;
+    letter-spacing: -0.06em;
 }
 
 .dst-error-page h1 {
-    margin: 0;
-    font-family: "Reem Kufi", sans-serif;
-    font-size: clamp(25px, 4vw, 42px);
+    margin: 12px 0 0;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-size: clamp(22px, 3.5vw, 32px);
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.7;
 }
 
 .dst-error-page .error-description {
-    max-width: 440px;
-    margin: 18px 0 0;
-    color: var(--error-text);
-    font-size: 13px;
+    max-width: 430px;
+    margin: 12px 0 0;
+    color: var(--error-muted);
+    font-size: 14px;
+    font-weight: 400;
     line-height: 2;
 }
 
 .dst-error-page .error-actions {
-    margin-top: 30px;
+    margin-top: 28px;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
     gap: 12px;
 }
 
 .dst-error-page .error-button {
-    min-height: 48px;
-    padding: 0 20px;
+    min-height: 46px;
+    min-width: 150px;
+    padding: 12px 22px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    font-size: 12px;
+    border: 1px solid var(--error-text);
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
     text-decoration: none;
-    transition: opacity .2s ease, transform .2s ease;
+    transition: opacity 0.2s ease;
 }
 
 .dst-error-page .error-button:hover {
-    opacity: .82;
-    transform: translateY(-2px);
+    opacity: 0.78;
+}
+
+.dst-error-page .error-button:focus-visible {
+    outline: 2px solid var(--error-text);
+    outline-offset: 4px;
 }
 
 .dst-error-page .error-button-primary {
@@ -127,50 +133,50 @@ body[data-theme="dark"] .dst-error-page {
 }
 
 .dst-error-page .error-button-secondary {
-    border: 1px solid var(--error-line);
+    background: transparent;
     color: var(--error-text);
 }
 
 .dst-error-page .error-footer {
-    margin: 48px 0 0;
+    margin: 38px 0 0;
     color: var(--error-muted);
     font-family: "Bodoni Moda", serif;
     font-size: 9px;
-    letter-spacing: .2em;
-    direction: ltr;
+    letter-spacing: 0.12em;
 }
 
 @media (max-width: 480px) {
     .dst-error-page {
-        padding: 14px;
+        padding: 12px;
     }
 
     .dst-error-page .error-frame {
-        min-height: calc(100svh - 28px);
+        min-height: calc(100svh - 24px);
         padding: 28px 18px;
     }
 
     .dst-error-page .error-logo {
-        width: 58px;
-        height: 58px;
-        margin-bottom: 28px;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 22px;
     }
 
     .dst-error-page .error-description {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .dst-error-page .error-actions {
         width: 100%;
         flex-direction: column;
+        align-items: center;
     }
 
     .dst-error-page .error-button {
-        width: min(100%, 270px);
+        width: min(100%, 280px);
     }
 
     .dst-error-page .error-footer {
-        margin-top: 36px;
+        margin-top: 30px;
         font-size: 8px;
     }
 }
