@@ -233,6 +233,17 @@ input, select, textarea {
     position: relative;
 }
 
+.package-empty-state {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 28px 22px;
+    border: 1px solid var(--line);
+    color: var(--walnut);
+    font-size: 14px;
+    line-height: 2;
+    text-align: center;
+}
+
 .package-option input[type="radio"] {
     position: absolute;
     width: 1px;
@@ -530,6 +541,18 @@ input, select, textarea {
 
 .submit-button:hover {
     transform: translateY(-3px);
+}
+
+.submit-button:disabled,
+.submit-button:disabled:hover {
+    opacity: .65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.submit-button:disabled::before,
+.submit-button:disabled::after {
+    display: none;
 }
 
 .submit-button::after {

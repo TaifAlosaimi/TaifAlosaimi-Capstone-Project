@@ -2,6 +2,8 @@
 
 An Arabic-first Django website for DST Photobooth. Visitors can learn about the service, review photobooth packages, and submit an event booking request. Staff manage packages and booking records through Django Admin.
 
+**Source repository:** [TaifAlosaimi/TaifAlosaimi-Capstone-Project](https://github.com/TaifAlosaimi/TaifAlosaimi-Capstone-Project) — includes the project's Git commit history.
+
 ## Project overview
 
 The site uses a premium editorial visual style and a responsive layout. Its main workflow is a booking request: the visitor chooses an existing package, submits event and contact details, Django validates the form, and a valid request is saved with the initial status `Pending`. The success page explains that DST will contact the customer to confirm the details; submission is not the same as final booking confirmation.
@@ -18,7 +20,8 @@ The site uses a premium editorial visual style and a responsive layout. Its main
 
 ## Technology stack
 
-- Python and Django
+- Python 3.14.6 (the version used in the supplied project virtual environment)
+- Django 6.1.1 (pinned in `requirements.txt`)
 - Django ORM
 - SQLite by default for local development; `DATABASE_URL` can configure a different database
 - HTML and CSS
@@ -45,7 +48,7 @@ See [`Documentation/ERD.png`](Documentation/ERD.png), [`Documentation/Business_R
 - New bookings default to `Pending`; staff can manage status in Django Admin.
 - Package price must be non-negative, and duration/photo count must be positive; these are backed by database constraints.
 
-For the full enforcement details, including which rules are form-level versus database-level, read `Documentation/Business_Rules.md`.
+For the full enforcement details, including which rules are form-level versus database-level, read `Documentation/Business_Rules.md`. For a repeatable set of fictional demo records, see `Documentation/Sample_Data.md`.
 
 ## Project structure
 
@@ -53,6 +56,7 @@ For the full enforcement details, including which rules are form-level versus da
 DST/
 ├── bookings/
 │   ├── migrations/
+│   ├── management/commands/load_demo_packages.py
 │   ├── static/bookings/
 │   ├── templates/bookings/
 │   ├── admin.py
@@ -69,7 +73,9 @@ DST/
 ├── Documentation/
 │   ├── ERD.png
 │   ├── Business_Rules.md
-│   └── User_Journey.md
+│   ├── Sample_Data.md
+│   ├── User_Journey.md
+│   └── Verification_Record.md
 ├── manage.py
 ├── requirements.txt
 ├── .gitignore
@@ -84,7 +90,7 @@ Commands below are for Windows PowerShell, from the directory containing `manage
 
    ```powershell
    python -m venv venv
-   .env\Scripts\Activate.ps1
+   .\venv\Scripts\Activate.ps1
    ```
 
 2. **Install dependencies**
@@ -109,19 +115,49 @@ Commands below are for Windows PowerShell, from the directory containing `manage
    python manage.py migrate
    ```
 
-5. **Create an administrator account (optional, for Django Admin)**
+5. **Collect static files**
+
+   This project uses WhiteNoise with a compressed manifest storage backend. Run this after migrations and whenever static assets change, especially before testing with `DEBUG=False` or preparing a deployment.
+
+   ```powershell
+   python manage.py collectstatic --noinput
+   ```
+
+6. **Load the approved demo packages**
+
+   A fresh database has no package records after migrations alone. Create the three approved DST packages with:
+
+   ```powershell
+   python manage.py load_demo_packages
+   ```
+
+   The command adds only packages that are missing by name. It does not overwrite existing package records, and it is safe to run again. Review `Documentation/Sample_Data.md` for the package values and optional fictional booking data used for the demo.
+
+7. **Create an administrator account (optional, for Django Admin)**
 
    ```powershell
    python manage.py createsuperuser
    ```
 
-6. **Run the development server**
+8. **Run the development server**
 
    ```powershell
    python manage.py runserver
    ```
 
-   Open `http://127.0.0.1:8000/`.
+   Open `http://127.0.0.1:8000/`. The booking page should now show the demo packages.
+
+### Verify the branded 404 page locally
+
+Django intentionally displays its technical 404 page while `DEBUG=True`. To verify the branded page, first collect static files, then run the server with debug disabled. Run these commands in the same PowerShell terminal from the project root:
+
+```powershell
+python manage.py collectstatic --noinput
+$env:DEBUG = "False"
+python manage.py runserver
+```
+
+Open `http://127.0.0.1:8000/this-url-does-not-exist/`. The expected result is the Arabic DST 404 page and an HTTP `404` response. When finished, stop the server and restore the development setting in that terminal with `$env:DEBUG = "True"` before running the server again. Do not use `DEBUG=False` without a valid `SECRET_KEY`, allowed host, and collected static files.
 
 ## Django Admin
 
@@ -129,19 +165,17 @@ After creating a superuser, open `http://127.0.0.1:8000/admin/`. The admin inter
 
 ## Tests and verification
 
-Run the included booking-flow tests with:
-
-```powershell
-python manage.py test bookings
-```
-
-Run Django's configuration checks with:
+Run the following commands from the project root after setup:
 
 ```powershell
 python manage.py check
+python manage.py makemigrations --check --dry-run
+python manage.py test bookings
 ```
 
-The tests cover blocking direct access to the success page without a successful booking, the valid booking submission/success flow, and the theme cookie redirect. Run these commands in the same environment used to verify the submitted version; do not treat a command as passing unless its output confirms success.
+The tests cover blocking direct access to the success page without a successful booking, the valid booking submission/success flow, repeatable demo-package loading, the empty-package state, rejection of an invalid phone number, the custom 404 handler with debug disabled, and the theme cookie redirect. The valid-booking test deliberately checks the initial redirect without following it, because following it consumes the one-time success session flag before the test can assert the success page itself.
+
+Record the actual outcomes in `Documentation/Verification_Record.md`. Do not mark a command as passing unless its output confirms success.
 
 ## Migrations
 
@@ -152,7 +186,8 @@ Keep all files in `bookings/migrations/` in version control. The migrations crea
 - The form creates a booking request with status `Pending`; it does not automatically confirm availability or prevent two requests for the same date/time.
 - There is no payment processing or customer account system.
 - Phone-format and future-date rules are enforced in the Django form, not as database constraints; direct ORM/database writes can bypass form-only validation.
-- A custom 404 handler is configured, but Django's debug mode shows its technical error page instead. For the branded 404 page, use `DEBUG=False` in a suitable local test configuration.
+- The branded 404 page is served only when `DEBUG=False`; Django's technical 404 page is expected during ordinary development with `DEBUG=True`. Follow the README's 404 verification steps to test the branded page with collected static files.
+- If no package records exist, the booking page displays an empty-state message and disables the booking submit button until packages are added in Django Admin.
 
 ## Future improvements
 

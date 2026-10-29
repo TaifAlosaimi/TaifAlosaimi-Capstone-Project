@@ -172,6 +172,12 @@
 
         </div>
 
+        {% empty %}
+
+        <p class="package-empty-state" role="status">
+            لا توجد باقات متاحة للحجز حاليًا. يرجى التواصل معنا لمعرفة التفاصيل.
+        </p>
+
         {% endfor %}
 
     </div>
@@ -370,12 +376,22 @@
 
         <section class="submit-section">
 
-            <button
-                type="submit"
-                class="submit-button"
-            >
-                إرسال طلب الحجز
-            </button>
+            {% if form.package.field.queryset %}
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    إرسال طلب الحجز
+                </button>
+            {% else %}
+                <button
+                    type="submit"
+                    class="submit-button"
+                    disabled
+                >
+                    لا تتوفر باقات للحجز حاليًا
+                </button>
+            {% endif %}
 
         </section>
 
