@@ -408,10 +408,13 @@ input, select, textarea {
     color: var(--taupe);
 }
 
+
+
 .field input,
 .field select,
 .field textarea {
     width: 100%;
+    min-width: 0;
     border: 1px solid transparent;
     border-bottom-color: var(--line);
     border-radius: 0;
@@ -475,6 +478,13 @@ input, select, textarea {
 .field input[type="date"] {
     direction: ltr;
     text-align: right;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .field input[type="email"],
@@ -556,13 +566,16 @@ input, select, textarea {
 }
 
 .submit-button::after {
-    content: "↗";
+    content: "";
     position: absolute;
     left: 22px;
     top: 50%;
     transform: translateY(-50%);
-    font-family: Arial, sans-serif;
-    font-size: 15px;
+    width: 15px;
+    height: 15px;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 17 17 7M7 7h10v10' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 17 17 7M7 7h10v10' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 
